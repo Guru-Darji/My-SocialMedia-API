@@ -5,7 +5,6 @@ const thoughtController = {
     // get all thoughts
     getAllThoughts(req, res) {
         Thought.find({})
-            // .populate('reactionId')
             .then(dbThoughtData => res.json(dbThoughtData))
             .catch(err => {
                 console.log(err);
@@ -18,7 +17,7 @@ const thoughtController = {
         Thought.findOne({ _id: params.thoughtId })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
-                    res.status(404).json({ message: 'No thought found with this id!' });
+                    res.status(404).json({ message: 'No thoughts with that Id found' });
                     return;
                 }
                 res.json(dbThoughtData);
@@ -55,7 +54,7 @@ const thoughtController = {
         Thought.findOneAndUpdate({ _id: params.thoughtId }, body, { new: true, runValidators: true })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
-                    res.status(404).json({ message: 'No thought found with this id!' });
+                    res.status(404).json({ message: 'No thoughts with that Id found' });
                     return;
                 }
                 res.json(dbThoughtData);
@@ -95,7 +94,7 @@ const thoughtController = {
         )
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
-                    return res.status(404).json({ message: 'No thought found with this id!' });
+                    return res.status(404).json({ message: 'No thoughts with that Id found' });
                 }
                 res.json(dbThoughtData);
             })
